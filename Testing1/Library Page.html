@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rangsit University Library</title>
+    <link rel="stylesheet" href="library.css">
+    <script defer src="library.js"></script>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <a href="#"><img src="rangsitlogo.png" alt="Rangsit University Logo" class="logo"></a>
+            <nav class="nav-bar">
+                <a href="#">Home</a>
+                <a href="#">About</a>
+                <a href="#">Services</a>
+                <a href="#">Contact</a>
+                <a href="#" id="lang-switch">EN / TH</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1 id="library-title">Rangsit University Library</h1>
+            <h2 id="hero-title">Empowering minds with books, journals, and digital resources.</h2>
+            <a href="Chatbot.html" id="btn-chat" class="btn">Ask the Chatbot</a>
+        </div>
+    </section>
+
+    <!-- Featured Section -->
+    <section class="featured">
+        <div class="container">
+            <h2 id="featured-title">Explore Our Library</h2>
+            <div class="featured-grid">
+                <div class="featured-item">
+                    <h3 id="featured1">Digital Library</h3>
+                    <p id="featured1-text">Access thousands of e-books, journals, and online databases.</p>
+                </div>
+                <div class="featured-item">
+                    <h3 id="featured2">Research Assistance</h3>
+                    <p id="featured2-text">Need help? Our librarians are here to assist you with research and citations.</p>
+                </div>
+                <div class="featured-item">
+                    <h3 id="featured3">Study Spaces</h3>
+                    <p id="featured3-text">Discover quiet study zones and group discussion rooms.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- FAQ Section -->
+    <section class="faq">
+        <div class="container">
+            <h2 id="faq-title">Frequently Asked Questions</h2>
+            <div class="faq-grid">
+                <div class="faq-item" onclick="toggleFAQ(this)">
+                    <h3 id="faq1">How do I get a library card?</h3>
+                    <p id="faq1-answer" class="faq-answer">Visit the circulation desk with your student ID.</p>
+                </div>
+                <div class="faq-item" onclick="toggleFAQ(this)">
+                    <h3 id="faq2">What are the library's hours?</h3>
+                    <p id="faq2-answer" class="faq-answer">Monday - Friday, 8:00 AM - 5:00 PM.</p>
+                </div>
+                <div class="faq-item" onclick="toggleFAQ(this)">
+                    <h3 id="faq3">Can I renew books online?</h3>
+                    <p id="faq3-answer" class="faq-answer">Yes, log in to 'My Account' to renew items.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p id="footer-text">© 2025 Rangsit University Library. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,290 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Georgia', serif;
+}
+
+/* Body */
+body {
+    background-color: #f9f9f9;
+    color: #333;
+    line-height: 1.8;
+}
+
+/* Container */
+.container {
+    width: 85%;
+    max-width: 1200px;
+    margin: auto;
+}
+
+/* Header */
+header {
+    background-color: rgb(35, 35, 35);
+    padding: 15px 0;
+    border-bottom: 1px solid #ddd;
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    height: 75px;
+}
+
+.nav-bar a {
+    text-decoration: none;
+    color: #ffffff;
+    font-size: 1.1rem;
+    margin-left: 20px;
+    transition: color 0.3s ease;
+}
+
+.nav-bar a:hover {
+    color: #990000;
+}
+
+/* Hero Section */
+.hero {
+    background: url('library-background.jpg') no-repeat center center/cover;
+    height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+}
+
+.hero-content {
+    background: rgba(0, 0, 0, 0.6);
+    padding: 30px;
+    border-radius: 10px;
+}
+
+.hero h1 {
+    font-size: 3rem;
+    font-weight: bold;
+}
+
+.hero p {
+    font-size: 1.3rem;
+    margin-top: 15px;
+}
+
+.btn {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 12px 30px;
+    background-color: #990000;
+    color: white;
+    font-size: 1.1rem;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #660000;
+}
+
+/* Featured Section */
+.featured {
+    padding: 50px 0;
+    background-color: rgb(35, 35, 35);
+    text-align: center;
+}
+
+.featured h2 {
+    font-size: 2rem;
+    margin-bottom: 30px;
+    color: #fff;
+}
+
+.featured-grid {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+}
+
+.featured-item {
+    background-color: #f8f8f8;
+    padding: 20px;
+    border-radius: 8px;
+    width: 30%;
+    transition: all 0.3s ease;
+}
+
+.featured-item:hover {
+    background-color: #ddd;
+}
+
+/* FAQ Section */
+.faq {
+    padding: 40px 0;
+    background-color: rgb(35, 35, 35);
+    text-align: center;
+    
+}
+
+.faq h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #fff;
+}
+
+.faq-grid {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+}
+
+.faq-item {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    width: 30%;
+}
+
+.faq-item:hover {
+    background-color: #eee;
+}
+
+.faq-answer {
+    display: none;
+    font-size: 1rem;
+    margin-top: 10px;
+}
+
+/* Footer */
+footer {
+    background: white;
+    color: #333;
+    text-align: center;
+    padding: 20px 0;
+    border-top: 1px solid #ddd;
+}
+
+/* RESPONSIVE DESIGN */
+
+/* Navigation - Mobile */
+@media (max-width: 768px) {
+    .header-container {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .nav-bar {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        margin-top: 10px;
+    }
+
+    .nav-bar a {
+        font-size: 1rem;
+        margin: 5px 0;
+    }
+}
+
+/* Hero Section - Responsive */
+@media (max-width: 1024px) {
+    .hero {
+        height: 300px;
+        padding: 20px;
+    }
+
+    .hero-content {
+        width: 90%;
+        padding: 20px;
+    }
+
+    .hero h1 {
+        font-size: 2.5rem;
+    }
+
+    .hero p {
+        font-size: 1.2rem;
+    }
+
+    .btn {
+        font-size: 1rem;
+        padding: 10px 25px;
+    }
+}
+
+@media (max-width: 768px) {
+    .hero h1 {
+        font-size: 2rem;
+    }
+
+    .hero p {
+        font-size: 1rem;
+    }
+
+    .btn {
+        font-size: 0.9rem;
+        padding: 8px 20px;
+    }
+}
+
+/* Featured Section - Responsive */
+@media (max-width: 1024px) {
+    .featured-grid {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .featured-item {
+        width: 80%;
+    }
+}
+
+@media (max-width: 768px) {
+    .featured-item {
+        width: 100%;
+    }
+
+    .featured h2 {
+        font-size: 1.8rem;
+    }
+}
+
+/* FAQ Section - Responsive */
+@media (max-width: 1024px) {
+    .faq-grid {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .faq-item {
+        width: 80%;
+    }
+}
+
+@media (max-width: 768px) {
+    .faq-item {
+        width: 100%;
+    }
+
+    .faq h2 {
+        font-size: 1.8rem;
+    }
+}
+
+/* Footer - Responsive */
+@media (max-width: 768px) {
+    footer {
+        font-size: 0.9rem;
+        padding: 15px;
+    }
+}
+
