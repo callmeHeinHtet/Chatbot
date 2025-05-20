@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library Services - Rangsit University Library</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><path fill='%23c41e3a' d='M96 0C43 0 0 43 0 96V416c0 53 43 96 96 96H384h32c17.7 0 32-14.3 32-32s-14.3-32-32-32V384c17.7 0 32-14.3 32-32V32c0-17.7-14.3-32-32-32H384 96zm0 384H352v64H96c-17.7 0-32-14.3-32-32s14.3-32 32-32zm32-240c0-8.8 7.2-16 16-16H336c8.8 0 16 7.2 16 16s-7.2 16-16 16H144c-8.8 0-16-7.2-16-16zm16 48H336c8.8 0 16 7.2 16 16s-7.2 16-16 16H144c-8.8 0-16-7.2-16-16s7.2-16 16-16z'/></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-logo">
+            <img src="assets/rangsit-logo.png" alt="RSU Logo">
+        </div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="resources.html">Resources</a>
+            <a href="services.html" class="active">Services</a>
+            <a href="news.html">News & Events</a>
+            <a href="chatbot.html" class="ask-btn">Ask Librarian</a>
+            <button id="toggle-theme" class="theme-toggle">
+                <i class="fas fa-moon"></i>
+            </button>
+            <div class="language-switch">
+                <a href="#" class="active">EN</a>
+                <span>/</span>
+                <a href="#">TH</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Services Header -->
+    <section class="page-header">
+        <h1>Library Services</h1>
+        <p>Discover the range of services available to support your academic journey</p>
+    </section>
+
+    <!-- Services Grid -->
+    <section class="services-grid">
+        <div class="service-card">
+            <i class="fas fa-book-reader"></i>
+            <h3>Borrowing & Returns</h3>
+            <ul>
+                <li>Book borrowing for students and staff</li>
+                <li>Inter-library loans</li>
+                <li>Self-service kiosks</li>
+                <li>Online renewal system</li>
+            </ul>
+            <a href="#" class="service-link">Learn More</a>
+        </div>
+
+        <div class="service-card">
+            <i class="fas fa-laptop"></i>
+            <h3>Computer & Printing</h3>
+            <ul>
+                <li>Computer workstations</li>
+                <li>Wireless printing</li>
+                <li>Scanning facilities</li>
+                <li>Technical support</li>
+            </ul>
+            <a href="#" class="service-link">Learn More</a>
+        </div>
+
+        <div class="service-card">
+            <i class="fas fa-users"></i>
+            <h3>Study Spaces</h3>
+            <ul>
+                <li>Group study rooms</li>
+                <li>Individual study carrels</li>
+                <li>Quiet study areas</li>
+                <li>24/7 study space</li>
+            </ul>
+            <a href="#" class="service-link">Learn More</a>
+        </div>
+
+        <div class="service-card">
+            <i class="fas fa-graduation-cap"></i>
+            <h3>Research Support</h3>
+            <ul>
+                <li>Research consultations</li>
+                <li>Citation management</li>
+                <li>Literature review help</li>
+                <li>Database training</li>
+            </ul>
+            <a href="#" class="service-link">Learn More</a>
+        </div>
+
+        <div class="service-card">
+            <i class="fas fa-chalkboard-teacher"></i>
+            <h3>Training & Workshops</h3>
+            <ul>
+                <li>Library orientation</li>
+                <li>Research skills workshops</li>
+                <li>Digital literacy training</li>
+                <li>Academic writing support</li>
+            </ul>
+            <a href="#" class="service-link">Learn More</a>
+        </div>
+
+        <div class="service-card">
+            <i class="fas fa-universal-access"></i>
+            <h3>Accessibility Services</h3>
+            <ul>
+                <li>Assistive technology</li>
+                <li>Special needs support</li>
+                <li>Alternative formats</li>
+                <li>Accessible study spaces</li>
+            </ul>
+            <a href="#" class="service-link">Learn More</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Contact Us</h3>
+                <p>Email: library@rsu.ac.th</p>
+                <p>Phone: +66 2123 4567</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <a href="#">Library Hours</a>
+                <a href="#">Book a Study Room</a>
+                <a href="#">Research Guides</a>
+            </div>
+            <div class="footer-section">
+                <h3>Follow Us</h3>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Rangsit University Library. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/theme.js" type="module"></script>
+</body>
+</html> 

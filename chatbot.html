@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RSU Library Assistant</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="css/chatbot.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar with quick links -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <img src="assets/rangsit-logo.png" alt="Rangsit University Logo" class="sidebar-logo">
+                <h3>Quick Links</h3>
+            </div>
+            <div class="quick-links">
+                <button class="quick-link-btn" data-question="What are the library hours?">
+                    <i class="fas fa-clock"></i> Library Hours
+                </button>
+                <button class="quick-link-btn" data-question="How do I borrow books?">
+                    <i class="fas fa-book"></i> Borrowing Books
+                </button>
+                <button class="quick-link-btn" data-question="Where can I find study rooms?">
+                    <i class="fas fa-door-open"></i> Study Rooms
+                </button>
+                <button class="quick-link-btn" data-question="How do I access online resources?">
+                    <i class="fas fa-laptop"></i> Online Resources
+                </button>
+            </div>
+            <div class="back-button-container">
+                <a href="index.html" class="back-button">
+                    <i class="fas fa-arrow-left"></i> Back to Library
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main chat interface -->
+        <main class="chat-container">
+            <header class="chat-header">
+                <div class="header-content">
+                    <h1>Library Assistant</h1>
+                    <p class="status">
+                        <span class="status-indicator"></span>
+                        <span class="status-text">Connecting...</span>
+                    </p>
+                </div>
+                <div class="header-actions">
+                    <button id="clear-chat" class="icon-button" title="Clear chat">
+                        <i class="fas fa-broom"></i>
+                    </button>
+                    <button id="toggle-theme" class="icon-button" title="Toggle theme">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                </div>
+            </header>
+
+            <div class="chat-messages" id="chat-messages">
+                <div class="welcome-message">
+                    <h2>Welcome to Rangsit University Library</h2>
+                    <p>I'm your AI library assistant. I can help you with:</p>
+                    <ul>
+                        <li>Finding books and resources</li>
+                        <li>Library hours and services</li>
+                        <li>Study room bookings</li>
+                        <li>Online database access</li>
+                    </ul>
+                    <p>How can I assist you today?</p>
+                </div>
+            </div>
+
+            <div class="chat-input-container">
+                <div class="input-wrapper">
+                    <textarea 
+                        id="user-input" 
+                        placeholder="Type your message here..."
+                        rows="1"
+                        aria-label="Message input"
+                    ></textarea>
+                    <button id="send-message" class="send-button" aria-label="Send message">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </div>
+                <div class="typing-indicator" style="display: none;">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script type="importmap">
+    {
+        "imports": {
+            "@google/generative-ai": "https://esm.run/@google/generative-ai"
+        }
+    }
+    </script>
+    <script src="js/config.js" type="module"></script>
+    <script src="js/theme.js" type="module"></script>
+    <script src="js/chat.js" type="module"></script>
+    <script src="js/chatbot.js" type="module"></script>
+</body>
+</html> 
