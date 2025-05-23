@@ -22,7 +22,7 @@ An AI-powered chatbot assistant for the Rangsit University Library that helps st
 
 1. Clone the repository
 ```bash
-git clone https://github.com/yourusername/rsu-library-assistant.git
+git clone https://github.com/callmeHeinHtet/rsu-library-assistant.git
 ```
 
 2. Configure API Key
