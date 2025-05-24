@@ -98,14 +98,10 @@ class Chatbot {
         welcomeMessage.className = 'welcome-message';
         welcomeMessage.innerHTML = `
             <h2>Welcome to Rangsit University Library</h2>
-            <p>I'm your AI library assistant. I can help you with:</p>
-            <ul>
-                <li>Finding books and resources</li>
-                <li>Library hours and services</li>
-                <li>Study room bookings</li>
-                <li>Online database access</li>
-            </ul>
-            <p>How can I assist you today?</p>
+            <p>Hi! I'm your friendly library assistant here to help you make the most of our library resources.</p>
+            <p>I can help you find books and access online databases, guide you through our services like borrowing and printing, 
+            book study rooms, and provide research assistance. I'm also happy to answer questions about library hours and facilities.</p>
+            <p>What can I help you with today?</p>
         `;
         this.messagesContainer.appendChild(welcomeMessage);
         this.chat_history = [];
@@ -133,19 +129,27 @@ class Chatbot {
             const result = await this.model.generateContent({
                 contents: [{
                     parts: [{
-                        text: `You are a helpful library assistant for Rangsit University Library. 
-                        You help students and faculty with questions about library services, resources, 
-                        and facilities. Be concise but friendly in your responses. If you don't know 
-                        something specific about RSU Library, be honest and provide general library guidance.
+                        text: `You are a friendly and helpful library assistant at Rangsit University Library.
+                        Respond in a natural, conversational way without using any special formatting or symbols like asterisks.
+                        Make students feel welcome and comfortable asking questions.
+                        
+                        When helping visitors:
+                        - Be warm and approachable
+                        - Use natural language and simple sentences
+                        - Avoid technical jargon unless necessary
+                        - Don't use any special formatting or markdown
+                        - Keep responses clear and concise
+                        - When asked about location, simply say "We're located in Building 7"
                         
                         Library Information:
                         - Hours: Mon-Fri 8:00-20:00, Sat-Sun 9:00-17:00
-                        - Location: 52/347 Muang-Ake, Phaholyothin Road, Lak-Hok, Muang, Pathumthani 12000
+                        - Location: Building 7
                         - Contact: library@rsu.ac.th, Tel: 02-997-2222 ext. 3461
                         - Services: Book borrowing, study rooms, computer access, printing, research support
                         - Online Resources: Access Pharmacy, BioMed Central, Business Source Ultimate, Science Direct
                         
-                        Keep responses under 150 words.
+                        Keep responses under 150 words and maintain a helpful, friendly tone.
+                        For location queries, just mention Building 7 - no need for the full address.
 
                         User question: ${message}`
                     }]
