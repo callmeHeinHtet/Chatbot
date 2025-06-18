@@ -97,11 +97,15 @@ class Chatbot {
         const welcomeMessage = document.createElement('div');
         welcomeMessage.className = 'welcome-message';
         welcomeMessage.innerHTML = `
-            <h2>Welcome to Rangsit University Library</h2>
-            <p>Hi! I'm your friendly library assistant here to help you make the most of our library resources.</p>
-            <p>I can help you find books and access online databases, guide you through our services like borrowing and printing, 
-            book study rooms, and provide research assistance. I'm also happy to answer questions about library hours and facilities.</p>
-            <p>What can I help you with today?</p>
+            <h2>Welcome to RSU Library</h2>
+            <p>Hi! I can help you with:</p>
+            <ul>
+                <li>Finding books and resources</li>
+                <li>Booking study rooms</li>
+                <li>Printing and computer services</li>
+                <li>Library hours and locations</li>
+            </ul>
+            <p>What can I help you with?</p>
         `;
         this.messagesContainer.appendChild(welcomeMessage);
         this.chat_history = [];
@@ -139,12 +143,10 @@ class Chatbot {
                         - Avoid technical jargon unless necessary
                         - Don't use any special formatting or markdown
                         - Keep responses clear and concise
-                        - You are able to talk Thai language
-                        - Use a friendly tone and be helpful
                         - When asked about location, simply say "We're located in Building 7"
                         
                         Library Information:
-                        - Hours: Mon-Fri 8:00-20:00, Sat-Sun 9:00-17:00
+                        - Hours: Mon-Fri 8:00-17:00, Sat-Sun 9:00-17:00
                         - Location: Building 7
                         - Contact: library@rsu.ac.th, Tel: 02-997-2222 ext. 3461
                         - Services: Book borrowing, study rooms, computer access, printing, research support
