@@ -36,7 +36,10 @@ const theme = {
     }
 };
 
-// Initialize theme when DOM is loaded
-document.addEventListener('DOMContentLoaded', () => {
+// Initialize theme — module scripts run after DOMContentLoaded has fired,
+// so check readyState before listening
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => theme.init());
+} else {
     theme.init();
-}); 
+}

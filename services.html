@@ -7,165 +7,169 @@
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><path fill='%23c41e3a' d='M96 0C43 0 0 43 0 96V416c0 53 43 96 96 96H384h32c17.7 0 32-14.3 32-32s-14.3-32-32-32V384c17.7 0 32-14.3 32-32V32c0-17.7-14.3-32-32-32H384 96zm0 384H352v64H96c-17.7 0-32-14.3-32-32s14.3-32 32-32zm32-240c0-8.8 7.2-16 16-16H336c8.8 0 16 7.2 16 16s-7.2 16-16 16H144c-8.8 0-16-7.2-16-16zm16 48H336c8.8 0 16 7.2 16 16s-7.2 16-16 16H144c-8.8 0-16-7.2-16-16s7.2-16 16-16z'/></svg>">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Funnel+Display:wght@300;400;500;600;700;800;900&family=Funnel+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
 
     <nav class="navbar">
-        <div class="nav-logo">
-            <img src="assets/rangsit-logo.png" alt="RSU Logo">
-        </div>
+        <a href="index.html" class="nav-logo" aria-label="Rangsit University Library — Home">
+            <img src="assets/rangsit-logo.png" alt="Rangsit University Logo">
+            <span class="nav-logo-text">
+                <span class="nav-logo-name" data-i18n="brand.name">RSU Library</span>
+                <span class="nav-logo-tagline" data-i18n="brand.tagline">Rangsit University</span>
+            </span>
+        </a>
         <div class="nav-links">
-            <a href="index.html">Home</a>
-            <a href="resources.html">Resources</a>
-            <a href="services.html" class="active">Services</a>
-            <a href="news.html">News & Events</a>
-            <a href="chatbot.html" class="ask-btn">Ask Librarian</a>
-            <button id="toggle-theme" class="theme-toggle">
+            <a href="index.html" data-i18n="nav.home">Home</a>
+            <a href="resources.html" data-i18n="nav.resources">Resources</a>
+            <a href="services.html" class="active" data-i18n="nav.services">Services</a>
+            <a href="news.html" data-i18n="nav.news">News &amp; Events</a>
+            <a href="chatbot.html" class="ask-btn" data-i18n="nav.askBtn">Ask Librarian</a>
+            <button id="toggle-theme" class="theme-toggle" aria-label="Toggle theme">
                 <i class="fas fa-moon"></i>
             </button>
             <div class="language-switch">
-                <a href="#" class="active">EN</a>
+                <button type="button" data-lang="en" class="active">EN</button>
                 <span>/</span>
-                <a href="#">TH</a>
+                <button type="button" data-lang="th">TH</button>
             </div>
         </div>
     </nav>
 
     <!-- Services Header -->
     <section class="page-header">
-        <h1>Library Services</h1>
-        <p>Discover the range of services available to support your academic journey</p>
+        <h1 data-i18n="services.headerTitle">Library Services</h1>
+        <p data-i18n="services.headerSubtitle">Discover the range of services available to support your academic journey</p>
     </section>
 
     <!-- Services Grid -->
     <section class="services-grid">
         <div class="service-card">
             <i class="fas fa-book-reader"></i>
-            <h3>Borrowing & Returns</h3>
+            <h3 data-i18n="services.borrowing.title">Borrowing &amp; Returns</h3>
             <ul>
-                <li>Book borrowing for students and staff (up to 10 items)</li>
-                <li>Inter-library loans with partner institutions</li>
-                <li>24/7 self-service kiosks for returns</li>
-                <li>Online renewal system (up to 3 renewals)</li>
-                <li>Reserve materials for courses</li>
-                <li>Document delivery service</li>
+                <li data-i18n="services.borrowing.i1">Book borrowing for students and staff (up to 10 items)</li>
+                <li data-i18n="services.borrowing.i2">Inter-library loans with partner institutions</li>
+                <li data-i18n="services.borrowing.i3">24/7 self-service kiosks for returns</li>
+                <li data-i18n="services.borrowing.i4">Online renewal system (up to 3 renewals)</li>
+                <li data-i18n="services.borrowing.i5">Reserve materials for courses</li>
+                <li data-i18n="services.borrowing.i6">Document delivery service</li>
             </ul>
-            <a href="#" class="service-link">Learn More</a>
+            <a href="#" class="service-link" data-i18n="services.learnMore">Learn More</a>
         </div>
 
         <div class="service-card">
             <i class="fas fa-laptop"></i>
-            <h3>Computer & Printing</h3>
+            <h3 data-i18n="services.computer.title">Computer &amp; Printing</h3>
             <ul>
-                <li>200+ computer workstations</li>
-                <li>Wireless printing from personal devices</li>
-                <li>High-speed scanning facilities</li>
-                <li>Technical support (8AM-8PM)</li>
-                <li>Color and B&W printing options</li>
-                <li>Software support for academic tools</li>
+                <li data-i18n="services.computer.i1">200+ computer workstations</li>
+                <li data-i18n="services.computer.i2">Wireless printing from personal devices</li>
+                <li data-i18n="services.computer.i3">High-speed scanning facilities</li>
+                <li data-i18n="services.computer.i4">Technical support (8AM-8PM)</li>
+                <li data-i18n="services.computer.i5">Color and B&amp;W printing options</li>
+                <li data-i18n="services.computer.i6">Software support for academic tools</li>
             </ul>
-            <a href="#" class="service-link">Learn More</a>
+            <a href="#" class="service-link" data-i18n="services.learnMore">Learn More</a>
         </div>
 
-        <div class="service-card">
+        <div class="service-card" id="study-spaces">
             <i class="fas fa-users"></i>
-            <h3>Study Spaces</h3>
+            <h3 data-i18n="services.study.title">Study Spaces</h3>
             <ul>
-                <li>20 Group study rooms (bookable online)</li>
-                <li>100+ Individual study carrels</li>
-                <li>Designated quiet study areas</li>
-                <li>24/7 study space with security</li>
-                <li>Collaborative learning zones</li>
-                <li>Media viewing rooms</li>
+                <li data-i18n="services.study.i1">20 Group study rooms (bookable online)</li>
+                <li data-i18n="services.study.i2">100+ Individual study carrels</li>
+                <li data-i18n="services.study.i3">Designated quiet study areas</li>
+                <li data-i18n="services.study.i4">24/7 study space with security</li>
+                <li data-i18n="services.study.i5">Collaborative learning zones</li>
+                <li data-i18n="services.study.i6">Media viewing rooms</li>
             </ul>
-            <a href="#" class="service-link">Learn More</a>
+            <a href="#" class="service-link" data-i18n="services.learnMore">Learn More</a>
         </div>
 
         <div class="service-card">
             <i class="fas fa-graduation-cap"></i>
-            <h3>Research Support</h3>
+            <h3 data-i18n="services.research.title">Research Support</h3>
             <ul>
-                <li>One-on-one research consultations</li>
-                <li>Citation management tools (EndNote, Zotero)</li>
-                <li>Systematic literature review assistance</li>
-                <li>Database training sessions</li>
-                <li>Research data management</li>
-                <li>Publication support services</li>
+                <li data-i18n="services.research.i1">One-on-one research consultations</li>
+                <li data-i18n="services.research.i2">Citation management tools (EndNote, Zotero)</li>
+                <li data-i18n="services.research.i3">Systematic literature review assistance</li>
+                <li data-i18n="services.research.i4">Database training sessions</li>
+                <li data-i18n="services.research.i5">Research data management</li>
+                <li data-i18n="services.research.i6">Publication support services</li>
             </ul>
-            <a href="#" class="service-link">Learn More</a>
+            <a href="#" class="service-link" data-i18n="services.learnMore">Learn More</a>
         </div>
 
         <div class="service-card">
             <i class="fas fa-chalkboard-teacher"></i>
-            <h3>Training & Workshops</h3>
+            <h3 data-i18n="services.training.title">Training &amp; Workshops</h3>
             <ul>
-                <li>Library orientation for new students</li>
-                <li>Advanced research skills workshops</li>
-                <li>Digital literacy certification</li>
-                <li>Academic writing workshops</li>
-                <li>Thesis formatting support</li>
-                <li>Information literacy programs</li>
+                <li data-i18n="services.training.i1">Library orientation for new students</li>
+                <li data-i18n="services.training.i2">Advanced research skills workshops</li>
+                <li data-i18n="services.training.i3">Digital literacy certification</li>
+                <li data-i18n="services.training.i4">Academic writing workshops</li>
+                <li data-i18n="services.training.i5">Thesis formatting support</li>
+                <li data-i18n="services.training.i6">Information literacy programs</li>
             </ul>
-            <a href="#" class="service-link">Learn More</a>
+            <a href="#" class="service-link" data-i18n="services.learnMore">Learn More</a>
         </div>
 
         <div class="service-card">
             <i class="fas fa-universal-access"></i>
-            <h3>Accessibility Services</h3>
+            <h3 data-i18n="services.accessibility.title">Accessibility Services</h3>
             <ul>
-                <li>Screen readers and magnification software</li>
-                <li>Special needs support staff</li>
-                <li>Alternative format materials</li>
-                <li>Accessible study spaces</li>
-                <li>Adaptive technology lab</li>
-                <li>Sign language interpretation (by appointment)</li>
+                <li data-i18n="services.accessibility.i1">Screen readers and magnification software</li>
+                <li data-i18n="services.accessibility.i2">Special needs support staff</li>
+                <li data-i18n="services.accessibility.i3">Alternative format materials</li>
+                <li data-i18n="services.accessibility.i4">Accessible study spaces</li>
+                <li data-i18n="services.accessibility.i5">Adaptive technology lab</li>
+                <li data-i18n="services.accessibility.i6">Sign language interpretation (by appointment)</li>
             </ul>
-            <a href="#" class="service-link">Learn More</a>
+            <a href="#" class="service-link" data-i18n="services.learnMore">Learn More</a>
         </div>
 
         <div class="service-card">
             <i class="fas fa-database"></i>
-            <h3>Digital Resources</h3>
+            <h3 data-i18n="services.digital.title">Digital Resources</h3>
             <ul>
-                <li>E-book and e-journal access</li>
-                <li>Online database subscriptions</li>
-                <li>Digital archives and repositories</li>
-                <li>Mobile library apps</li>
-                <li>Virtual reference service</li>
-                <li>Off-campus access support</li>
+                <li data-i18n="services.digital.i1">E-book and e-journal access</li>
+                <li data-i18n="services.digital.i2">Online database subscriptions</li>
+                <li data-i18n="services.digital.i3">Digital archives and repositories</li>
+                <li data-i18n="services.digital.i4">Mobile library apps</li>
+                <li data-i18n="services.digital.i5">Virtual reference service</li>
+                <li data-i18n="services.digital.i6">Off-campus access support</li>
             </ul>
-            <a href="#" class="service-link">Learn More</a>
+            <a href="#" class="service-link" data-i18n="services.learnMore">Learn More</a>
         </div>
 
         <div class="service-card">
             <i class="fas fa-tools"></i>
-            <h3>Special Equipment</h3>
+            <h3 data-i18n="services.equipment.title">Special Equipment</h3>
             <ul>
-                <li>3D printers and scanners</li>
-                <li>Audio/video recording equipment</li>
-                <li>Digital cameras and accessories</li>
-                <li>Multimedia editing stations</li>
-                <li>VR/AR equipment</li>
-                <li>Presentation practice rooms</li>
+                <li data-i18n="services.equipment.i1">3D printers and scanners</li>
+                <li data-i18n="services.equipment.i2">Audio/video recording equipment</li>
+                <li data-i18n="services.equipment.i3">Digital cameras and accessories</li>
+                <li data-i18n="services.equipment.i4">Multimedia editing stations</li>
+                <li data-i18n="services.equipment.i5">VR/AR equipment</li>
+                <li data-i18n="services.equipment.i6">Presentation practice rooms</li>
             </ul>
-            <a href="#" class="service-link">Learn More</a>
+            <a href="#" class="service-link" data-i18n="services.learnMore">Learn More</a>
         </div>
 
         <div class="service-card">
             <i class="fas fa-book"></i>
-            <h3>Collection Services</h3>
+            <h3 data-i18n="services.collection.title">Collection Services</h3>
             <ul>
-                <li>New acquisition requests</li>
-                <li>Course reserve materials</li>
-                <li>Special collections access</li>
-                <li>Archive consultation</li>
-                <li>Preservation services</li>
-                <li>Collection suggestions</li>
+                <li data-i18n="services.collection.i1">New acquisition requests</li>
+                <li data-i18n="services.collection.i2">Course reserve materials</li>
+                <li data-i18n="services.collection.i3">Special collections access</li>
+                <li data-i18n="services.collection.i4">Archive consultation</li>
+                <li data-i18n="services.collection.i5">Preservation services</li>
+                <li data-i18n="services.collection.i6">Collection suggestions</li>
             </ul>
-            <a href="#" class="service-link">Learn More</a>
+            <a href="#" class="service-link" data-i18n="services.learnMore">Learn More</a>
         </div>
     </section>
 
@@ -173,18 +177,19 @@
     <footer class="footer">
         <div class="footer-content">
             <div class="footer-section">
-                <h3>Contact Us</h3>
-                <p>Email: library@rsu.ac.th</p>
-                <p>Phone: +66 2123 4567</p>
+                <h3 data-i18n="footer.contactHeading">Contact Us</h3>
+                <p><span data-i18n="footer.email">Email</span>: library@rsu.ac.th</p>
+                <p><span data-i18n="footer.phone">Phone</span>: 02-997-2222 ext. 3461</p>
             </div>
             <div class="footer-section">
-                <h3>Quick Links</h3>
-                <a href="#">Library Hours</a>
-                <a href="#">Book a Study Room</a>
-                <a href="#">Research Guides</a>
+                <h3 data-i18n="footer.quickLinksHeading">Quick Links</h3>
+                <a href="services.html" data-i18n="footer.hours">Library Hours</a>
+                <a href="services.html#study-spaces" data-i18n="footer.studyRoom">Book a Study Room</a>
+                <a href="resources.html" data-i18n="footer.guides">Research Guides</a>
+                <a href="chatbot.html" data-i18n="footer.askAi">Ask the AI</a>
             </div>
             <div class="footer-section">
-                <h3>Follow Us</h3>
+                <h3 data-i18n="footer.followHeading">Follow Us</h3>
                 <div class="social-links">
                     <a href="#"><i class="fab fa-facebook"></i></a>
                     <a href="#"><i class="fab fa-twitter"></i></a>
@@ -193,11 +198,12 @@
             </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; 2024 Rangsit University Library. All rights reserved.</p>
+            <p data-i18n="footer.copyright">&copy; 2026 Rangsit University Library. All rights reserved.</p>
         </div>
     </footer>
 
     <!-- Scripts -->
     <script src="js/theme.js" type="module"></script>
+    <script src="js/i18n.js" type="module"></script>
 </body>
 </html> 

@@ -4,94 +4,231 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rangsit University Library</title>
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><path fill='%23c41e3a' d='M96 0C43 0 0 43 0 96V416c0 53 43 96 96 96H384h32c17.7 0 32-14.3 32-32s-14.3-32-32-32V384c17.7 0 32-14.3 32-32V32c0-17.7-14.3-32-32-32H384 96zm0 384H352v64H96c-17.7 0-32-14.3-32-32s14.3-32 32-32zm32-240c0-8.8 7.2-16 16-16H336c8.8 0 16 7.2 16 16s-7.2 16-16 16H144c-8.8 0-16-7.2-16-16zm16 48H336c8.8 0 16 7.2 16 16s-7.2 16-16 16H144c-8.8 0-16-7.2-16-16s7.2-16 16-16z'/></svg>">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><path fill='%23ec1e79' d='M96 0C43 0 0 43 0 96V416c0 53 43 96 96 96H384h32c17.7 0 32-14.3 32-32s-14.3-32-32-32V384c17.7 0 32-14.3 32-32V32c0-17.7-14.3-32-32-32H384 96zm0 384H352v64H96c-17.7 0-32-14.3-32-32s14.3-32 32-32zm32-240c0-8.8 7.2-16 16-16H336c8.8 0 16 7.2 16 16s-7.2 16-16 16H144c-8.8 0-16-7.2-16-16zm16 48H336c8.8 0 16 7.2 16 16s-7.2 16-16 16H144c-8.8 0-16-7.2-16-16s7.2-16 16-16z'/></svg>">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Funnel+Display:wght@300;400;500;600;700;800;900&family=Funnel+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
     <!-- Navigation Bar -->
     <nav class="navbar">
-        <div class="nav-logo">
-            <img src="assets/rangsit-logo.png" alt="RSU Logo">
-        </div>
+        <a href="index.html" class="nav-logo" aria-label="Rangsit University Library — Home">
+            <img src="assets/rangsit-logo.png" alt="Rangsit University Logo">
+            <span class="nav-logo-text">
+                <span class="nav-logo-name" data-i18n="brand.name">RSU Library</span>
+                <span class="nav-logo-tagline" data-i18n="brand.tagline">Est. 1986 · Pathumthani</span>
+            </span>
+        </a>
         <div class="nav-links">
-            <a href="index.html" class="active">Home</a>
-            <a href="resources.html">Resources</a>
-            <a href="services.html">Services</a>
-            <a href="news.html">News & Events</a>
-            <a href="chatbot.html" class="ask-btn">Ask Librarian</a>
-            <button id="toggle-theme" class="theme-toggle">
+            <a href="index.html" class="active" data-i18n="nav.home">Home</a>
+            <a href="resources.html" data-i18n="nav.resources">Resources</a>
+            <a href="services.html" data-i18n="nav.services">Services</a>
+            <a href="news.html" data-i18n="nav.news">News &amp; Events</a>
+            <a href="chatbot.html" class="ask-btn" data-i18n="nav.askBtn">Ask AI →</a>
+            <button id="toggle-theme" class="theme-toggle" aria-label="Toggle theme">
                 <i class="fas fa-moon"></i>
             </button>
             <div class="language-switch">
-                <a href="#" class="active">EN</a>
+                <button type="button" data-lang="en" class="active">EN</button>
                 <span>/</span>
-                <a href="#">TH</a>
+                <button type="button" data-lang="th">TH</button>
             </div>
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="hero-content">
-            <h1>Rangsit University Library</h1>
-            <p>Your Gateway to Knowledge and Discovery</p>
-            <div class="hero-buttons">
-                <a href="chatbot.html" class="cta-button primary">Ask the Librarian</a>
-                <a href="#explore" class="cta-button secondary">Explore Resources</a>
+    <!-- HERO — full-bleed cyan poster -->
+    <section class="hero grain">
+        <div class="hero__halftone"></div>
+        <div class="hero__inner">
+            <!-- LEFT: Poster content -->
+            <div class="hero__left">
+                <span class="hero__stamp" data-i18n="home.stamp">Filed · 04 / 05 / 26</span>
+
+                <h1 class="hero__heading display">
+                    <span data-i18n="home.heroLine1">Ask the</span><br>
+                    <span class="accent" data-i18n="home.heroLine2">library</span><br>
+                    <span data-i18n="home.heroLine3">any</span>
+                    <span class="pink" data-i18n="home.heroLine4">hour</span><span data-i18n="home.heroDot">.</span>
+                </h1>
+
+                <p class="hero__lede" data-i18n="home.lede">
+                    300,000+ references in the catalog. 50+ databases. And a librarian-AI that doesn't go home at 8.
+                </p>
+
+                <div class="search-bar">
+                    <input
+                        type="text"
+                        id="hero-search"
+                        placeholder="Find a title, author, subject — or just ask a question…"
+                        data-i18n="home.searchPlaceholder"
+                        data-i18n-attr="placeholder"
+                    >
+                    <button type="button" data-i18n="home.search">Search</button>
+                </div>
+
+                <div class="filter-row">
+                    <button class="filter-pill active" data-i18n="home.filters.catalog">Catalog</button>
+                    <button class="filter-pill" data-i18n="home.filters.databases">Databases</button>
+                    <button class="filter-pill" data-i18n="home.filters.archives">Archives</button>
+                    <a href="chatbot.html" class="filter-pill ai">
+                        <span class="pulse-dot"></span>
+                        <span data-i18n="home.filters.askAi">Ask the AI</span>
+                    </a>
+                </div>
             </div>
+
+            <!-- RIGHT: Status ticket -->
+            <aside class="hero__right">
+                <div class="deco-circle">
+                    <span class="text">
+                        <span data-i18n="home.deco.num">24</span><br>
+                        <span data-i18n="home.deco.unit">Hrs</span><br>
+                        <span data-i18n="home.deco.status">Open</span>
+                    </span>
+                </div>
+
+                <div class="ticket">
+                    <div class="ticket__head">
+                        <span class="ticket__head-title" data-i18n="home.ticket.title">Tonight's Status</span>
+                        <span class="ticket__head-num" id="local-time">№ 22:14 ICT</span>
+                    </div>
+
+                    <div class="ticket__row">
+                        <span class="ticket__key" data-i18n="home.ticket.refDesk">Reference Desk</span>
+                        <span class="ticket__val off" data-i18n="home.ticket.refDeskVal">Closed · 8AM Mon</span>
+                    </div>
+
+                    <div class="ticket__row">
+                        <span class="ticket__key" data-i18n="home.ticket.aiAssistant">AI Assistant</span>
+                        <span class="ticket__val live">
+                            <span class="live-dot"></span>
+                            <span data-i18n="home.ticket.aiAssistantVal">Online · EN/TH</span>
+                        </span>
+                    </div>
+
+                    <div class="ticket__row">
+                        <span class="ticket__key" data-i18n="home.ticket.building">Building 7</span>
+                        <span class="ticket__val" data-i18n="home.ticket.buildingVal">12 / 20 Free</span>
+                    </div>
+
+                    <div class="ticket__row">
+                        <span class="ticket__key" data-i18n="home.ticket.hours">Hours</span>
+                        <span class="ticket__val" data-i18n="home.ticket.hoursVal">8 — 20:00</span>
+                    </div>
+
+                    <div class="ticket__cta">
+                        <span class="ticket__cta-label" data-i18n="home.ticket.askAnything">Ask anything</span>
+                        <a href="chatbot.html" class="ticket__cta-btn" data-i18n="home.ticket.openChat">Open chat →</a>
+                    </div>
+                </div>
+            </aside>
         </div>
     </section>
 
-    <!-- Featured Resources -->
-    <section class="featured-resources">
-        <h2>Featured Resources</h2>
-        <div class="resource-grid">
-            <div class="resource-card">
-                <i class="fas fa-book"></i>
-                <h3>Digital Collection</h3>
-                <p>Access our extensive collection of e-books and digital materials</p>
-            </div>
-            <div class="resource-card">
-                <i class="fas fa-newspaper"></i>
-                <h3>Academic Journals</h3>
-                <p>Browse through peer-reviewed journals and publications</p>
-            </div>
-            <div class="resource-card">
-                <i class="fas fa-graduation-cap"></i>
-                <h3>Research Support</h3>
-                <p>Get assistance with your research and academic writing</p>
-            </div>
-            <div class="resource-card">
-                <i class="fas fa-database"></i>
-                <h3>Online Databases</h3>
-                <p>Access specialized academic databases and archives</p>
-            </div>
+    <!-- STRIPE -->
+    <section class="stripe">
+        <div class="stripe__items">
+            <span class="stripe__item">
+                <span class="stripe__num">1</span>
+                <span data-i18n="home.stripe.catalog">Catalog</span>
+            </span>
+            <span class="stripe__item">
+                <span class="stripe__num">2</span>
+                <span data-i18n="home.stripe.databases">Databases</span>
+            </span>
+            <span class="stripe__item">
+                <span class="stripe__num">3</span>
+                <span data-i18n="home.stripe.services">Services</span>
+            </span>
+            <span class="stripe__item">
+                <span class="stripe__num">4</span>
+                <span data-i18n="home.stripe.askAi">Ask AI</span>
+            </span>
         </div>
+        <span class="stripe__meta" data-i18n="home.stripe.meta">Library Use Only · Bldg 7</span>
     </section>
 
-    <!-- News & Events -->
-    <section class="news-events">
-        <h2>Latest Updates</h2>
-        <div class="news-grid">
-            <article class="news-card">
-                <div class="news-date">May 2024</div>
-                <h3>Extended Library Hours During Finals</h3>
-                <p>The library will remain open 24/7 during the final examination period.</p>
-            </article>
-            <article class="news-card">
-                <div class="news-date">April 2024</div>
-                <h3>New Database Subscriptions</h3>
-                <p>Access to new research databases now available for all students.</p>
-            </article>
-            <article class="news-card">
-                <div class="news-date">March 2024</div>
-                <h3>Library Workshop Series</h3>
-                <p>Join our upcoming workshops on research methodologies and academic writing.</p>
-            </article>
+    <!-- DATABASE POSTER SECTION -->
+    <section class="poster-section" id="explore">
+        <header class="section-header">
+            <span class="section-num display">02</span>
+            <h2 class="section-title display">
+                <span data-i18n="home.dbHeading1">Databases.</span><br>
+                <span data-i18n="home.dbHeading2">By subject.</span>
+            </h2>
+            <span class="section-meta">
+                <span data-i18n="home.dbMeta1">Updated this term</span><br>
+                <span data-i18n="home.dbMeta2">8 of 50+ shown</span>
+            </span>
+        </header>
+
+        <div class="db-grid">
+            <a href="resources.html" class="db-card">
+                <div>
+                    <div class="db-card__num">A · 01</div>
+                    <div class="db-card__name display">Access<br>Pharmacy</div>
+                    <div class="db-card__cat" data-i18n="home.db.healthCat">Health · McGraw-Hill</div>
+                </div>
+                <span class="db-card__access" data-i18n="home.db.access">Access</span>
+            </a>
+            <a href="resources.html" class="db-card">
+                <div>
+                    <div class="db-card__num">B · 02</div>
+                    <div class="db-card__name display">BioMed<br>Central</div>
+                    <div class="db-card__cat" data-i18n="home.db.medicalCat">Medical · Open Access</div>
+                </div>
+                <span class="db-card__access" data-i18n="home.db.access">Access</span>
+            </a>
+            <a href="resources.html" class="db-card">
+                <div>
+                    <div class="db-card__num">E · 03</div>
+                    <div class="db-card__name display">EBSCO<br>Business</div>
+                    <div class="db-card__cat" data-i18n="home.db.businessCat">Business · Industry</div>
+                </div>
+                <span class="db-card__access" data-i18n="home.db.access">Access</span>
+            </a>
+            <a href="resources.html" class="db-card">
+                <div>
+                    <div class="db-card__num">E · 04</div>
+                    <div class="db-card__name display">EBSCO<br>Discovery</div>
+                    <div class="db-card__cat" data-i18n="home.db.allInOneCat">All-in-one Search</div>
+                </div>
+                <span class="db-card__access" data-i18n="home.db.access">Access</span>
+            </a>
+            <a href="resources.html" class="db-card">
+                <div>
+                    <div class="db-card__num">I · 05</div>
+                    <div class="db-card__name display">IEEE<br>Xplore</div>
+                    <div class="db-card__cat" data-i18n="home.db.engineeringCat">Engineering · IEEE</div>
+                </div>
+                <span class="db-card__access" data-i18n="home.db.access">Access</span>
+            </a>
+            <a href="resources.html" class="db-card">
+                <div>
+                    <div class="db-card__num">S · 06</div>
+                    <div class="db-card__name display">Science<br>Direct</div>
+                    <div class="db-card__cat" data-i18n="home.db.scienceCat">Science · Elsevier</div>
+                </div>
+                <span class="db-card__access" data-i18n="home.db.access">Access</span>
+            </a>
+            <a href="resources.html" class="db-card">
+                <div>
+                    <div class="db-card__num">S · 07</div>
+                    <div class="db-card__name display">Scopus</div>
+                    <div class="db-card__cat" data-i18n="home.db.indexCat">Citation Index · 27k+ titles</div>
+                </div>
+                <span class="db-card__access" data-i18n="home.db.access">Access</span>
+            </a>
+            <a href="resources.html" class="db-card">
+                <div>
+                    <div class="db-card__num">T · 08</div>
+                    <div class="db-card__name display">Turnitin</div>
+                    <div class="db-card__cat" data-i18n="home.db.plagiarismCat">Plagiarism Check</div>
+                </div>
+                <span class="db-card__access" data-i18n="home.db.access">Access</span>
+            </a>
         </div>
     </section>
 
@@ -99,31 +236,44 @@
     <footer class="footer">
         <div class="footer-content">
             <div class="footer-section">
-                <h3>Contact Us</h3>
-                <p>Email: library@rsu.ac.th</p>
-                <p>Phone: +66 2123 4567</p>
+                <h3 data-i18n="footer.contactHeading">Contact</h3>
+                <p>52/347 Muang-Ake, Phaholyothin Road</p>
+                <p>Lak-Hok, Muang, Pathumthani 12000</p>
+                <p><span data-i18n="footer.email">Email</span>: library@rsu.ac.th</p>
+                <p><span data-i18n="footer.phone">Phone</span>: 02-997-2222 ext. 3461</p>
             </div>
             <div class="footer-section">
-                <h3>Quick Links</h3>
-                <a href="#">Library Hours</a>
-                <a href="#">Book a Study Room</a>
-                <a href="#">Research Guides</a>
+                <h3 data-i18n="footer.quickLinksHeading">Quick Links</h3>
+                <a href="services.html" data-i18n="footer.hours">Library Hours</a>
+                <a href="services.html#study-spaces" data-i18n="footer.studyRoom">Book a Study Room</a>
+                <a href="resources.html" data-i18n="footer.guides">Research Guides</a>
+                <a href="chatbot.html" data-i18n="footer.askAi">Ask the AI</a>
             </div>
             <div class="footer-section">
-                <h3>Follow Us</h3>
+                <h3 data-i18n="footer.followHeading">Follow</h3>
                 <div class="social-links">
-                    <a href="https://www.facebook.com/rangsituniversity"><i class="fab fa-facebook"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.facebook.com/rangsituniversity" aria-label="Facebook" target="_blank" rel="noopener"><i class="fab fa-facebook-f"></i></a>
                 </div>
             </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; 2024 Rangsit University Library. All rights reserved.</p>
+            <p data-i18n="footer.copyright">© 2026 Rangsit University Library · All rights reserved</p>
         </div>
     </footer>
 
     <!-- Scripts -->
     <script src="js/theme.js" type="module"></script>
+    <script src="js/i18n.js" type="module"></script>
+    <script>
+        function updateLocalTime() {
+            const now = new Date();
+            const hours = String(now.getHours()).padStart(2, '0');
+            const mins = String(now.getMinutes()).padStart(2, '0');
+            const el = document.getElementById('local-time');
+            if (el) el.textContent = `№ ${hours}:${mins} ICT`;
+        }
+        updateLocalTime();
+        setInterval(updateLocalTime, 1000 * 30);
+    </script>
 </body>
-</html> 
+</html>

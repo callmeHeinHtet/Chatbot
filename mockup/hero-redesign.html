@@ -1,0 +1,1055 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MOCKUP V3 — RSU Library · Risograph</title>
+
+    <!-- Different typeface family this time — NO Fraunces, NO DM Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Funnel+Display:wght@300;400;500;600;700;800;900&family=Funnel+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        /* ============================================================
+           RISOGRAPH ACADEMIC POSTER — flat color blocks, halftone, stamps
+           ============================================================ */
+        :root {
+            --cyan: #00b8d9;          /* riso cyan, saturated */
+            --cyan-deep: #008caa;
+            --pink: #ec1e79;          /* riso magenta */
+            --pink-deep: #c1145d;
+            --yellow: #ffd60a;        /* riso yellow accent */
+            --ink: #0a0a0a;           /* pure black */
+            --paper: #fffaf2;         /* off-white, slight warm */
+            --paper-deep: #f3ebd9;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html, body {
+            font-family: 'Funnel Sans', sans-serif;
+            background: var(--paper);
+            color: var(--ink);
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        a { color: inherit; text-decoration: none; }
+        button { font: inherit; cursor: pointer; }
+
+        .display { font-family: 'Funnel Display', sans-serif; }
+
+        /* ============================================================
+           Halftone dot pattern — riso print feel
+           ============================================================ */
+        .halftone-cyan {
+            background-image:
+                radial-gradient(circle, rgba(0, 0, 0, 0.18) 1.6px, transparent 2px);
+            background-size: 12px 12px;
+            background-position: 0 0;
+        }
+
+        .halftone-pink {
+            background-image:
+                radial-gradient(circle, rgba(255, 255, 255, 0.4) 1.5px, transparent 2px);
+            background-size: 14px 14px;
+        }
+
+        .grain {
+            position: relative;
+        }
+        .grain::after {
+            content: '';
+            position: absolute; inset: 0;
+            background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.95' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.18 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+            pointer-events: none;
+            opacity: 0.5;
+            mix-blend-mode: multiply;
+        }
+
+        /* MOCKUP banner */
+        .mockup-banner {
+            position: fixed; top: 12px; right: 12px;
+            background: var(--ink); color: var(--yellow);
+            padding: 6px 14px;
+            font: 700 11px/1 'Funnel Display', sans-serif;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            z-index: 9999;
+        }
+
+        /* ============================================================
+           NAVBAR — black bar, sharp
+           ============================================================ */
+        .navbar {
+            background: var(--ink);
+            color: var(--paper);
+            padding: 14px 4%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 4px solid var(--pink);
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-logo img {
+            height: 38px;
+            filter: brightness(0) invert(1) saturate(0);
+            opacity: 0.9;
+        }
+
+        .nav-logo-text {
+            display: flex;
+            flex-direction: column;
+            line-height: 1;
+            color: var(--paper);
+        }
+
+        .nav-logo-name {
+            font: 700 0.95rem/1 'Funnel Display';
+            letter-spacing: -0.01em;
+        }
+
+        .nav-logo-tagline {
+            font: 600 0.62rem 'Funnel Sans';
+            color: var(--cyan);
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            margin-top: 4px;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 1.8rem;
+        }
+
+        .nav-links a:not(.ask-btn) {
+            font: 600 0.84rem 'Funnel Sans';
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--paper);
+            opacity: 0.7;
+            transition: opacity 0.15s, color 0.15s;
+        }
+
+        .nav-links a:not(.ask-btn):hover { opacity: 1; }
+
+        .nav-links a.active {
+            opacity: 1;
+            color: var(--cyan);
+        }
+
+        .ask-btn {
+            background: var(--pink);
+            color: white !important;
+            padding: 9px 18px;
+            font: 800 0.82rem 'Funnel Display';
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: transform 0.15s, background 0.15s;
+        }
+
+        .ask-btn:hover {
+            background: var(--yellow);
+            color: var(--ink) !important;
+            transform: translate(-1px, -1px);
+            box-shadow: 3px 3px 0 var(--ink);
+        }
+
+        .nav-meta {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            font: 700 0.74rem 'Funnel Sans';
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        .nav-meta button {
+            background: transparent;
+            border: 1.5px solid transparent;
+            color: var(--paper);
+            opacity: 0.5;
+            padding: 5px 9px;
+            transition: all 0.15s;
+        }
+
+        .nav-meta button.active {
+            opacity: 1;
+            border-color: var(--cyan);
+            color: var(--cyan);
+        }
+
+        .nav-meta button:hover { opacity: 1; }
+
+        .nav-meta .slash { color: var(--paper); opacity: 0.3; }
+
+        /* ============================================================
+           HERO — full-bleed cyan poster
+           ============================================================ */
+        .hero {
+            background: var(--cyan);
+            color: var(--ink);
+            position: relative;
+            padding: 0;
+            overflow: hidden;
+            min-height: 78vh;
+        }
+
+        .hero__halftone {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            opacity: 0.7;
+        }
+
+        .hero__inner {
+            display: grid;
+            grid-template-columns: 1.4fr 1fr;
+            gap: 0;
+            min-height: 78vh;
+            position: relative;
+        }
+
+        /* LEFT: poster content */
+        .hero__left {
+            padding: 4rem 4% 4rem 5%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+        }
+
+        /* Library "stamp" graphic in top-left */
+        .hero__stamp {
+            position: absolute;
+            top: 2.5rem;
+            left: 5%;
+            background: var(--pink);
+            color: var(--paper);
+            padding: 8px 14px;
+            font: 800 0.78rem 'Funnel Display';
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            transform: rotate(-3deg);
+            box-shadow: 4px 4px 0 var(--ink);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .hero__stamp::before {
+            content: '✓';
+            font-size: 1.05rem;
+        }
+
+        .hero__heading {
+            font: 900 clamp(3.5rem, 8.5vw, 7.5rem) 'Funnel Display';
+            line-height: 0.86;
+            letter-spacing: -0.045em;
+            text-transform: uppercase;
+            color: var(--ink);
+            margin-top: 5rem;
+            margin-bottom: 1.6rem;
+        }
+
+        .hero__heading .accent {
+            background: var(--ink);
+            color: var(--yellow);
+            padding: 0 0.18em 0.05em;
+            display: inline-block;
+            transform: rotate(-1.5deg);
+            margin-left: -0.05em;
+        }
+
+        .hero__heading .pink {
+            color: var(--pink);
+            font-style: italic;
+            font-weight: 800;
+        }
+
+        .hero__lede {
+            font: 500 1.1rem 'Funnel Sans';
+            line-height: 1.45;
+            color: var(--ink);
+            max-width: 480px;
+            margin-bottom: 2.6rem;
+        }
+
+        /* Search — black flat bar, no card */
+        .search-bar {
+            display: flex;
+            align-items: stretch;
+            background: var(--ink);
+            border: 3px solid var(--ink);
+            max-width: 640px;
+            box-shadow: 6px 6px 0 var(--ink);
+        }
+
+        .search-bar input {
+            flex: 1;
+            background: var(--paper);
+            border: none;
+            padding: 16px 18px;
+            font: 600 1rem 'Funnel Sans';
+            color: var(--ink);
+            outline: none;
+        }
+
+        .search-bar input::placeholder {
+            color: var(--ink);
+            opacity: 0.4;
+            font-weight: 500;
+        }
+
+        .search-bar button {
+            background: var(--ink);
+            color: var(--yellow);
+            border: none;
+            padding: 0 22px;
+            font: 800 0.92rem 'Funnel Display';
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: background 0.15s, color 0.15s;
+        }
+
+        .search-bar button:hover {
+            background: var(--pink);
+            color: var(--paper);
+        }
+
+        .filter-row {
+            display: flex;
+            gap: 10px;
+            margin-top: 1.2rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-pill {
+            background: var(--paper);
+            color: var(--ink);
+            border: 2px solid var(--ink);
+            padding: 8px 14px;
+            font: 700 0.78rem 'Funnel Sans';
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            transition: all 0.15s;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .filter-pill:hover {
+            transform: translate(-1px, -1px);
+            box-shadow: 3px 3px 0 var(--ink);
+        }
+
+        .filter-pill.active {
+            background: var(--ink);
+            color: var(--paper);
+        }
+
+        .filter-pill.ai {
+            background: var(--pink);
+            color: var(--paper);
+            border-color: var(--ink);
+        }
+
+        .filter-pill.ai .pulse-dot {
+            width: 7px; height: 7px;
+            border-radius: 50%;
+            background: var(--yellow);
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.3); }
+        }
+
+        /* RIGHT: status ticket / library card */
+        .hero__right {
+            background: var(--paper);
+            position: relative;
+            padding: 4rem 4% 4rem 3rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            border-left: 3px solid var(--ink);
+        }
+
+        /* Pink accent block on right */
+        .hero__right::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 38%;
+            height: 100%;
+            background: var(--pink);
+            opacity: 0.08;
+            pointer-events: none;
+        }
+
+        .ticket {
+            background: var(--paper);
+            border: 3px solid var(--ink);
+            padding: 1.6rem 1.8rem 1.8rem;
+            position: relative;
+            box-shadow: 8px 8px 0 var(--ink);
+            max-width: 460px;
+        }
+
+        /* Ticket perforation top */
+        .ticket::before {
+            content: '';
+            position: absolute;
+            top: -3px;
+            left: 0; right: 0;
+            height: 14px;
+            background-image: radial-gradient(circle at 8px 10px, var(--paper) 5px, transparent 6px);
+            background-size: 16px 14px;
+            background-position: 0 0;
+        }
+
+        .ticket__head {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 12px;
+            border-bottom: 2px dashed var(--ink);
+            margin-bottom: 1.4rem;
+        }
+
+        .ticket__head-title {
+            font: 800 0.78rem 'Funnel Display';
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+        }
+
+        .ticket__head-num {
+            font: 600 0.7rem 'Funnel Sans';
+            color: var(--ink);
+            opacity: 0.5;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        .ticket__row {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(10, 10, 10, 0.12);
+        }
+
+        .ticket__row:last-of-type { border-bottom: none; }
+
+        .ticket__key {
+            font: 700 0.74rem 'Funnel Display';
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--ink);
+            opacity: 0.55;
+            flex-shrink: 0;
+        }
+
+        .ticket__val {
+            font: 800 1.05rem 'Funnel Display';
+            color: var(--ink);
+            text-align: right;
+        }
+
+        .ticket__val.live {
+            color: var(--cyan-deep);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .live-dot {
+            width: 9px; height: 9px;
+            border-radius: 50%;
+            background: var(--cyan-deep);
+            animation: pulse 1.6s ease-in-out infinite;
+        }
+
+        .ticket__val.off {
+            color: var(--pink);
+        }
+
+        .ticket__cta {
+            margin-top: 1.4rem;
+            padding-top: 1.4rem;
+            border-top: 2px dashed var(--ink);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .ticket__cta-label {
+            font: 700 0.74rem 'Funnel Display';
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            opacity: 0.6;
+        }
+
+        .ticket__cta-btn {
+            background: var(--ink);
+            color: var(--yellow);
+            padding: 10px 16px;
+            font: 800 0.82rem 'Funnel Display';
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.15s;
+        }
+
+        .ticket__cta-btn:hover {
+            background: var(--pink);
+            color: var(--paper);
+            transform: translate(-1px, -1px);
+            box-shadow: 3px 3px 0 var(--cyan-deep);
+        }
+
+        /* Big halftone "MARK" decoration outside the ticket */
+        .deco-circle {
+            position: absolute;
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            background: var(--ink);
+            color: var(--yellow);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            font: 900 1.05rem 'Funnel Display';
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            line-height: 1.1;
+            top: -50px;
+            right: -50px;
+            transform: rotate(8deg);
+            box-shadow: -6px 6px 0 var(--cyan);
+            z-index: 5;
+        }
+
+        .deco-circle::before {
+            content: '';
+            position: absolute;
+            inset: 8px;
+            border: 2px solid var(--yellow);
+            border-radius: 50%;
+        }
+
+        .deco-circle .text {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ============================================================
+           STRIPE — pink stamped section
+           ============================================================ */
+        .stripe {
+            background: var(--pink);
+            color: var(--paper);
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font: 700 0.86rem 'Funnel Display';
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            border-top: 3px solid var(--ink);
+            border-bottom: 3px solid var(--ink);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stripe::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: radial-gradient(circle, rgba(0, 0, 0, 0.18) 1px, transparent 1.5px);
+            background-size: 14px 14px;
+            opacity: 0.5;
+            pointer-events: none;
+        }
+
+        .stripe__items {
+            display: flex;
+            gap: 3rem;
+            align-items: center;
+            position: relative;
+        }
+
+        .stripe__item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .stripe__num {
+            background: var(--paper);
+            color: var(--pink);
+            width: 24px; height: 24px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font: 800 0.74rem 'Funnel Display';
+        }
+
+        /* ============================================================
+           SECTIONS — alternating poster blocks
+           ============================================================ */
+        .poster-section {
+            padding: 4.5rem 5% 5rem;
+            background: var(--paper);
+            position: relative;
+        }
+
+        .section-header {
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            gap: 2rem;
+            align-items: end;
+            margin-bottom: 3rem;
+            padding-bottom: 1.2rem;
+            border-bottom: 3px solid var(--ink);
+        }
+
+        .section-num {
+            font: 900 5rem 'Funnel Display';
+            line-height: 0.9;
+            color: var(--cyan);
+            letter-spacing: -0.04em;
+        }
+
+        .section-title {
+            font: 800 clamp(2.4rem, 4.5vw, 3.6rem) 'Funnel Display';
+            line-height: 0.95;
+            letter-spacing: -0.03em;
+            text-transform: uppercase;
+        }
+
+        .section-meta {
+            font: 600 0.78rem 'Funnel Sans';
+            color: var(--ink);
+            opacity: 0.6;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            text-align: right;
+            line-height: 1.5;
+        }
+
+        /* Database list — block cards in a poster grid */
+        .db-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 0;
+            border-top: 3px solid var(--ink);
+            border-left: 3px solid var(--ink);
+        }
+
+        .db-card {
+            border-right: 3px solid var(--ink);
+            border-bottom: 3px solid var(--ink);
+            padding: 1.6rem 1.4rem 1.4rem;
+            background: var(--paper);
+            transition: background 0.15s, transform 0.15s;
+            position: relative;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 180px;
+        }
+
+        .db-card:hover {
+            background: var(--cyan);
+        }
+
+        .db-card:nth-child(3n+1):hover {
+            background: var(--pink);
+            color: var(--paper);
+        }
+
+        .db-card:nth-child(2n):hover {
+            background: var(--yellow);
+        }
+
+        .db-card__num {
+            font: 600 0.74rem 'Funnel Sans';
+            opacity: 0.5;
+            letter-spacing: 0.14em;
+            margin-bottom: 0.6rem;
+        }
+
+        .db-card__name {
+            font: 800 1.4rem 'Funnel Display';
+            line-height: 1.05;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.6rem;
+        }
+
+        .db-card__cat {
+            font: 600 0.7rem 'Funnel Sans';
+            text-transform: uppercase;
+            letter-spacing: 0.14em;
+            opacity: 0.6;
+            margin-bottom: 1.4rem;
+        }
+
+        .db-card__access {
+            font: 800 0.78rem 'Funnel Display';
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--ink);
+            margin-top: auto;
+        }
+
+        .db-card__access::after {
+            content: '↗';
+            transition: transform 0.15s;
+        }
+
+        .db-card:hover .db-card__access::after {
+            transform: translate(2px, -2px);
+        }
+
+        /* ============================================================
+           Annotation
+           ============================================================ */
+        .anno {
+            background: var(--ink);
+            color: var(--paper);
+            padding: 2.2rem 5% 2.6rem;
+            border-top: 4px solid var(--cyan);
+        }
+
+        .anno h3 {
+            font: 800 0.8rem 'Funnel Display';
+            color: var(--yellow);
+            letter-spacing: 0.24em;
+            text-transform: uppercase;
+            margin-bottom: 1.2rem;
+        }
+
+        .anno ol {
+            list-style: decimal-leading-zero;
+            padding-left: 2.6rem;
+            max-width: 920px;
+            font: 500 0.94rem 'Funnel Sans';
+            line-height: 1.6;
+        }
+
+        .anno li {
+            padding-left: 0.5rem;
+            margin-bottom: 8px;
+            color: rgba(255, 250, 242, 0.78);
+        }
+
+        .anno li::marker {
+            color: var(--cyan);
+            font: 800 0.78rem 'Funnel Display';
+        }
+
+        .anno strong {
+            color: var(--paper);
+            background: var(--pink);
+            padding: 1px 5px;
+            font-weight: 700;
+        }
+
+        /* ============================================================
+           Responsive
+           ============================================================ */
+        @media (max-width: 980px) {
+            .hero__inner { grid-template-columns: 1fr; }
+            .hero__right { border-left: none; border-top: 3px solid var(--ink); }
+            .deco-circle { display: none; }
+            .nav-links { display: none; }
+            .stripe { flex-direction: column; gap: 1rem; padding: 1.4rem 5%; }
+            .stripe__items { flex-direction: column; gap: 0.8rem; }
+            .section-header { grid-template-columns: 1fr; gap: 1rem; }
+            .section-meta { text-align: left; }
+        }
+
+        /* Page-load entrance */
+        @keyframes punch {
+            from { opacity: 0; transform: translate(-8px, 0); }
+            to { opacity: 1; transform: translate(0, 0); }
+        }
+
+        .hero__stamp,
+        .hero__heading,
+        .hero__lede,
+        .search-bar,
+        .filter-row,
+        .ticket {
+            opacity: 0;
+            animation: punch 0.5s cubic-bezier(0.2, 0.7, 0.3, 1) forwards;
+        }
+        .hero__stamp { animation-delay: 0.05s; }
+        .hero__heading { animation-delay: 0.1s; }
+        .hero__lede { animation-delay: 0.25s; }
+        .search-bar { animation-delay: 0.35s; }
+        .filter-row { animation-delay: 0.45s; }
+        .ticket { animation-delay: 0.2s; }
+    </style>
+</head>
+<body>
+    <span class="mockup-banner">MOCKUP V3 · RISO POSTER</span>
+
+    <!-- ============================================================
+         NAVBAR — black bar, sharp, pink underline
+         ============================================================ -->
+    <nav class="navbar">
+        <a href="#" class="nav-logo">
+            <img src="../assets/rangsit-logo.png" alt="RSU">
+            <span class="nav-logo-text">
+                <span class="nav-logo-name">RSU LIBRARY</span>
+                <span class="nav-logo-tagline">EST. 1986 · PATHUMTHANI</span>
+            </span>
+        </a>
+        <div class="nav-links">
+            <a href="#" class="active">Home</a>
+            <a href="#">Catalog</a>
+            <a href="#">Databases</a>
+            <a href="#">Services</a>
+            <a href="#">News</a>
+            <a href="#" class="ask-btn">Ask AI →</a>
+        </div>
+        <div class="nav-meta">
+            <button class="active">EN</button>
+            <span class="slash">/</span>
+            <button>TH</button>
+        </div>
+    </nav>
+
+    <!-- ============================================================
+         HERO — full-bleed cyan poster
+         ============================================================ -->
+    <section class="hero grain">
+        <div class="hero__halftone halftone-cyan"></div>
+        <div class="hero__inner">
+            <!-- LEFT: Poster content -->
+            <div class="hero__left">
+                <span class="hero__stamp">FILED · 04 / 05 / 26</span>
+
+                <h1 class="hero__heading display">
+                    Ask the<br>
+                    <span class="accent">library</span><br>
+                    any <span class="pink">hour</span>.
+                </h1>
+
+                <p class="hero__lede">
+                    300,000+ references in the catalog. 50+ databases.
+                    And a librarian-AI that doesn't go home at 8.
+                </p>
+
+                <div class="search-bar">
+                    <input type="text" placeholder="Find a title, author, subject — or just ask a question…">
+                    <button>Search</button>
+                </div>
+
+                <div class="filter-row">
+                    <button class="filter-pill active">Catalog</button>
+                    <button class="filter-pill">Databases</button>
+                    <button class="filter-pill">Archives</button>
+                    <button class="filter-pill ai">
+                        <span class="pulse-dot"></span> Ask the AI
+                    </button>
+                </div>
+            </div>
+
+            <!-- RIGHT: Status ticket -->
+            <aside class="hero__right">
+                <div class="deco-circle">
+                    <span class="text">24<br>HRS<br>OPEN</span>
+                </div>
+
+                <div class="ticket">
+                    <div class="ticket__head">
+                        <span class="ticket__head-title">Tonight's Status</span>
+                        <span class="ticket__head-num" id="local-time">№ 22:14 ICT</span>
+                    </div>
+
+                    <div class="ticket__row">
+                        <span class="ticket__key">Reference Desk</span>
+                        <span class="ticket__val off">Closed · 8AM Mon</span>
+                    </div>
+
+                    <div class="ticket__row">
+                        <span class="ticket__key">AI Assistant</span>
+                        <span class="ticket__val live">
+                            <span class="live-dot"></span> Online · EN/TH
+                        </span>
+                    </div>
+
+                    <div class="ticket__row">
+                        <span class="ticket__key">Building 7</span>
+                        <span class="ticket__val">12 / 20 Free</span>
+                    </div>
+
+                    <div class="ticket__row">
+                        <span class="ticket__key">Hours</span>
+                        <span class="ticket__val">8 — 20:00</span>
+                    </div>
+
+                    <div class="ticket__cta">
+                        <span class="ticket__cta-label">Ask anything</span>
+                        <a href="#" class="ticket__cta-btn">Open chat →</a>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         STRIPE — pink stamped meta info
+         ============================================================ -->
+    <section class="stripe">
+        <div class="stripe__items">
+            <span class="stripe__item"><span class="stripe__num">1</span> Catalog</span>
+            <span class="stripe__item"><span class="stripe__num">2</span> Databases</span>
+            <span class="stripe__item"><span class="stripe__num">3</span> Services</span>
+            <span class="stripe__item"><span class="stripe__num">4</span> Ask AI</span>
+        </div>
+        <span style="opacity: 0.7;">Library Use Only · Bldg 7</span>
+    </section>
+
+    <!-- ============================================================
+         POSTER SECTION 02 — Databases
+         ============================================================ -->
+    <section class="poster-section">
+        <header class="section-header">
+            <span class="section-num display">02</span>
+            <h2 class="section-title display">Databases.<br>By subject.</h2>
+            <span class="section-meta">
+                Updated this term<br>
+                8 of 50+ shown
+            </span>
+        </header>
+
+        <div class="db-grid">
+            <a href="#" class="db-card">
+                <div>
+                    <div class="db-card__num">A · 01</div>
+                    <div class="db-card__name display">Access<br>Pharmacy</div>
+                    <div class="db-card__cat">Health · McGraw-Hill</div>
+                </div>
+                <span class="db-card__access">Access</span>
+            </a>
+            <a href="#" class="db-card">
+                <div>
+                    <div class="db-card__num">B · 02</div>
+                    <div class="db-card__name display">BioMed<br>Central</div>
+                    <div class="db-card__cat">Medical · Open Access</div>
+                </div>
+                <span class="db-card__access">Access</span>
+            </a>
+            <a href="#" class="db-card">
+                <div>
+                    <div class="db-card__num">E · 03</div>
+                    <div class="db-card__name display">EBSCO<br>Business</div>
+                    <div class="db-card__cat">Business · Industry</div>
+                </div>
+                <span class="db-card__access">Access</span>
+            </a>
+            <a href="#" class="db-card">
+                <div>
+                    <div class="db-card__num">E · 04</div>
+                    <div class="db-card__name display">EBSCO<br>Discovery</div>
+                    <div class="db-card__cat">All-in-one Search</div>
+                </div>
+                <span class="db-card__access">Access</span>
+            </a>
+            <a href="#" class="db-card">
+                <div>
+                    <div class="db-card__num">I · 05</div>
+                    <div class="db-card__name display">IEEE<br>Xplore</div>
+                    <div class="db-card__cat">Engineering · IEEE</div>
+                </div>
+                <span class="db-card__access">Access</span>
+            </a>
+            <a href="#" class="db-card">
+                <div>
+                    <div class="db-card__num">S · 06</div>
+                    <div class="db-card__name display">Science<br>Direct</div>
+                    <div class="db-card__cat">Science · Elsevier</div>
+                </div>
+                <span class="db-card__access">Access</span>
+            </a>
+            <a href="#" class="db-card">
+                <div>
+                    <div class="db-card__num">S · 07</div>
+                    <div class="db-card__name display">Scopus</div>
+                    <div class="db-card__cat">Citation Index · 27k+ titles</div>
+                </div>
+                <span class="db-card__access">Access</span>
+            </a>
+            <a href="#" class="db-card">
+                <div>
+                    <div class="db-card__num">T · 08</div>
+                    <div class="db-card__name display">Turnitin</div>
+                    <div class="db-card__cat">Plagiarism Check</div>
+                </div>
+                <span class="db-card__access">Access</span>
+            </a>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         Annotation
+         ============================================================ -->
+    <aside class="anno">
+        <h3>What's different · v3 (Risograph)</h3>
+        <ol>
+            <li><strong>Bold flat color</strong>, not warm cream. Cyan + pink + ink as full-bleed blocks like a riso print, not editorial paper.</li>
+            <li><strong>No serif anywhere.</strong> Funnel Display + Funnel Sans throughout — a typeface family I haven't used elsewhere. Bold uppercase + tight tracking instead of literary italics.</li>
+            <li><strong>Halftone dot textures</strong> + grain noise = riso print feel. Cheap-printed-poster aesthetic that fits campus / student culture.</li>
+            <li><strong>Stamp + ticket motifs.</strong> The "FILED · 04/05/26" rotated stamp, the perforated ticket on the right, the "24 HRS OPEN" black-on-yellow circle — all reference real library checkout culture, not magazine spreads.</li>
+            <li><strong>Hard shadows, not soft.</strong> Every interactive element has a 4–8px solid black drop-shadow that shifts on hover. Punchy and physical, not glassy.</li>
+            <li><strong>Database grid is a tight-bordered block grid</strong> with hover color flips (cyan, pink, yellow). Less catalog-card, more poster grid.</li>
+            <li><strong>Different from Stay/AungNaingThu</strong> — no Fraunces serif, no JetBrains Mono codes, no leader dots, no warm cream. Clean break from the editorial house style.</li>
+        </ol>
+    </aside>
+
+    <script>
+        function updateTime() {
+            const now = new Date();
+            const hours = String(now.getHours()).padStart(2, '0');
+            const mins = String(now.getMinutes()).padStart(2, '0');
+            const el = document.getElementById('local-time');
+            if (el) el.textContent = `№ ${hours}:${mins} ICT`;
+        }
+        updateTime();
+        setInterval(updateTime, 1000 * 30);
+    </script>
+</body>
+</html>

@@ -16,25 +16,25 @@
         <aside class="sidebar">
             <div class="sidebar-header">
                 <img src="assets/rangsit-logo.png" alt="Rangsit University Logo" class="sidebar-logo">
-                <h3>Quick Links</h3>
+                <h3 data-i18n="chatbot.sidebar.quickLinks">Quick Links</h3>
             </div>
             <div class="quick-links">
                 <button class="quick-link-btn" data-question="What are the library hours?">
-                    <i class="fas fa-clock"></i> Library Hours
+                    <i class="fas fa-clock"></i> <span data-i18n="chatbot.sidebar.hours">Library Hours</span>
                 </button>
                 <button class="quick-link-btn" data-question="How do I borrow books?">
-                    <i class="fas fa-book"></i> Borrowing Books
+                    <i class="fas fa-book"></i> <span data-i18n="chatbot.sidebar.borrowing">Borrowing Books</span>
                 </button>
                 <button class="quick-link-btn" data-question="Where can I find study rooms?">
-                    <i class="fas fa-door-open"></i> Study Rooms
+                    <i class="fas fa-door-open"></i> <span data-i18n="chatbot.sidebar.studyRooms">Study Rooms</span>
                 </button>
                 <button class="quick-link-btn" data-question="How do I access online resources?">
-                    <i class="fas fa-laptop"></i> Online Resources
+                    <i class="fas fa-laptop"></i> <span data-i18n="chatbot.sidebar.onlineResources">Online Resources</span>
                 </button>
             </div>
             <div class="back-button-container">
                 <a href="index.html" class="back-button">
-                    <i class="fas fa-arrow-left"></i> Back to Library
+                    <i class="fas fa-arrow-left"></i> <span data-i18n="chatbot.sidebar.backToLibrary">Back to Library</span>
                 </a>
             </div>
         </aside>
@@ -43,41 +43,48 @@
         <main class="chat-container">
             <header class="chat-header">
                 <div class="header-content">
-                    <h1>Library Assistant</h1>
+                    <h1 data-i18n="chatbot.header.title">Library Assistant</h1>
                     <p class="status">
                         <span class="status-indicator"></span>
-                        <span class="status-text">Connecting...</span>
+                        <span class="status-text" data-i18n="chatbot.header.connecting">Connecting...</span>
                     </p>
                 </div>
                 <div class="header-actions">
-                    <button id="clear-chat" class="icon-button" title="Clear chat">
+                    <button id="clear-chat" class="icon-button" title="Clear chat" aria-label="Clear chat">
                         <i class="fas fa-broom"></i>
                     </button>
-                    <button id="toggle-theme" class="icon-button" title="Toggle theme">
+                    <button id="toggle-theme" class="icon-button" title="Toggle theme" aria-label="Toggle theme">
                         <i class="fas fa-moon"></i>
                     </button>
+                    <div class="language-switch">
+                        <button type="button" data-lang="en" class="active">EN</button>
+                        <span>/</span>
+                        <button type="button" data-lang="th">TH</button>
+                    </div>
                 </div>
             </header>
 
             <div class="chat-messages" id="chat-messages">
                 <div class="welcome-message">
-                    <h2>Welcome to RSU Library</h2>
-                    <p>Hi! I can help you with:</p>
+                    <h2 data-i18n="chatbot.welcome.title">Welcome to RSU Library</h2>
+                    <p data-i18n="chatbot.welcome.intro">Hi! I can help you with:</p>
                     <ul>
-                        <li>Finding books and resources</li>
-                        <li>Booking study rooms</li>
-                        <li>Printing and computer services</li>
-                        <li>Library hours and locations</li>
+                        <li data-i18n="chatbot.welcome.i1">Finding books and resources</li>
+                        <li data-i18n="chatbot.welcome.i2">Booking study rooms</li>
+                        <li data-i18n="chatbot.welcome.i3">Printing and computer services</li>
+                        <li data-i18n="chatbot.welcome.i4">Library hours and locations</li>
                     </ul>
-                    <p>What can I help you with?</p>
+                    <p data-i18n="chatbot.welcome.prompt">What can I help you with?</p>
                 </div>
             </div>
 
             <div class="chat-input-container">
                 <div class="input-wrapper">
-                    <textarea 
-                        id="user-input" 
+                    <textarea
+                        id="user-input"
                         placeholder="Type your message here..."
+                        data-i18n="chatbot.input.placeholder"
+                        data-i18n-attr="placeholder"
                         rows="1"
                         aria-label="Message input"
                     ></textarea>
@@ -95,16 +102,9 @@
     </div>
 
     <!-- Scripts -->
-    <script type="importmap">
-    {
-        "imports": {
-            "@google/generative-ai": "https://esm.run/@google/generative-ai"
-        }
-    }
-    </script>
-    <script src="js/config.js" type="module"></script>
     <script src="js/theme.js" type="module"></script>
-    <script src="js/chat.js" type="module"></script>
+    <script src="js/i18n.js" type="module"></script>
     <script src="js/chatbot.js" type="module"></script>
 </body>
-</html> 
+</html>
+ 

@@ -1,6 +1,12 @@
 {
-  "dependencies": {
-    "@google/generative-ai": "^0.24.1",
-    "openai": "^4.100.0"
+  "name": "rsu-library-assistant",
+  "version": "1.0.0",
+  "description": "Rangsit University Library AI assistant — vanilla JS frontend + Express backend proxy for Gemini",
+  "scripts": {
+    "dev": "cd backend && npm run dev",
+    "start": "cd backend && npm start",
+    "install:all": "cd backend && npm install"
   }
 }
+
+

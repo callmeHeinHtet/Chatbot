@@ -46,15 +46,11 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Perform search (to be implemented based on backend requirements)
+    // Search isn't wired to a real backend yet — surface that inline instead of with an alert().
+    // We forward the query to the AI assistant where it CAN actually help.
     function performSearch(query, type, tab) {
-        console.log(`Searching for: ${query}`);
-        console.log(`Search type: ${type}`);
-        console.log(`Selected tab: ${tab}`);
-        
-        // Here you would typically make an API call to your backend
-        // For now, we'll just show an alert
-        alert(`Search functionality will be implemented here.\nQuery: ${query}\nType: ${type}\nTab: ${tab}`);
+        const params = new URLSearchParams({ q: query, type, tab })
+        window.location.href = `chatbot.html?${params.toString()}`
     }
 
     // Database card hover effects

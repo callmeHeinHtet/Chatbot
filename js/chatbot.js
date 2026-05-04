@@ -1,186 +1,210 @@
-import { GoogleGenerativeAI } from '@google/generative-ai';
-import { API_KEY } from './config.js';
+/**
+ * RSU Library AI — frontend chat client
+ *
+ * Calls /api/chat (backend Express proxy). The Gemini API key is held
+ * server-side and never reaches the browser. History is maintained
+ * client-side and sent with each request (backend is stateless).
+ */
+
+const RATE_LIMIT_MS = 1500 // minimum time between sends — protects free quota
 
 class Chatbot {
     constructor() {
-        this.genAI = new GoogleGenerativeAI(API_KEY);
-        this.model = this.genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
-        this.chat_history = [];
-        this.setupUI();
-        this.setupEventListeners();
-        this.updateStatus(true);
+        this.history = []           // [{role:'user'|'model', parts:[{text}]}]
+        this.lastSendTime = 0
+        this.setupUI()
+        this.setupEventListeners()
+        this.checkBackendHealth()
     }
 
     setupUI() {
-        this.messagesContainer = document.getElementById('chat-messages');
-        this.userInput = document.getElementById('user-input');
-        this.sendButton = document.getElementById('send-message');
-        this.typingIndicator = document.querySelector('.typing-indicator');
-        this.clearButton = document.getElementById('clear-chat');
-        this.quickLinks = document.querySelectorAll('.quick-link-btn');
+        this.messagesContainer = document.getElementById('chat-messages')
+        this.userInput = document.getElementById('user-input')
+        this.sendButton = document.getElementById('send-message')
+        this.typingIndicator = document.querySelector('.typing-indicator')
+        this.clearButton = document.getElementById('clear-chat')
+        this.quickLinks = document.querySelectorAll('.quick-link-btn')
     }
 
     setupEventListeners() {
-        // Send message on button click
-        this.sendButton.addEventListener('click', () => this.handleSendMessage());
+        this.sendButton.addEventListener('click', () => this.handleSendMessage())
 
-        // Send message on Enter (but new line on Shift+Enter)
         this.userInput.addEventListener('keydown', (e) => {
             if (e.key === 'Enter' && !e.shiftKey) {
-                e.preventDefault();
-                this.handleSendMessage();
+                e.preventDefault()
+                this.handleSendMessage()
             }
-        });
+        })
 
-        // Auto-resize textarea
-        this.userInput.addEventListener('input', () => this.adjustTextareaHeight());
+        this.userInput.addEventListener('input', () => this.adjustTextareaHeight())
 
-        // Clear chat
-        this.clearButton?.addEventListener('click', () => this.clearChat());
+        this.clearButton?.addEventListener('click', () => this.clearChat())
 
-        // Quick links
-        this.quickLinks.forEach(link => {
+        this.quickLinks.forEach((link) => {
             link.addEventListener('click', () => {
-                const question = link.dataset.question;
+                const question = link.dataset.question
                 if (question) {
-                    this.userInput.value = question;
-                    this.handleSendMessage();
+                    this.userInput.value = question
+                    this.handleSendMessage()
                 }
-            });
-        });
+            })
+        })
+
+        // Listen for language change → reset chat so the bot doesn't reference
+        // English context in a Thai reply (or vice versa).
+        document.addEventListener('rsu:lang-changed', () => this.resetForLanguageChange())
+    }
+
+    async checkBackendHealth() {
+        try {
+            const r = await fetch('/api/health')
+            if (r.ok) {
+                this.updateStatus(true)
+                return
+            }
+        } catch {}
+        this.updateStatus(false)
     }
 
     updateStatus(isOnline) {
-        const statusIndicator = document.querySelector('.status-indicator');
-        const statusText = document.querySelector('.status-text');
-        
-        if (isOnline) {
-            statusIndicator.classList.add('online');
-            statusText.textContent = 'Online';
-        } else {
-            statusIndicator.classList.remove('online');
-            statusText.textContent = 'Offline';
-        }
+        const statusEl = document.querySelector('.status')
+        const statusText = document.querySelector('.status-text')
+        if (!statusText || !statusEl) return
+        statusEl.classList.toggle('online', isOnline)
+        statusText.textContent = isOnline ? 'Online' : 'Offline'
     }
 
     adjustTextareaHeight() {
-        const textarea = this.userInput;
-        textarea.style.height = 'auto';
-        textarea.style.height = Math.min(textarea.scrollHeight, 120) + 'px';
+        const textarea = this.userInput
+        textarea.style.height = 'auto'
+        textarea.style.height = Math.min(textarea.scrollHeight, 120) + 'px'
     }
 
     addMessage(text, isUser = false) {
-        const messageDiv = document.createElement('div');
-        messageDiv.className = `message ${isUser ? 'user' : 'bot'}`;
-        messageDiv.textContent = text;
-        this.messagesContainer.appendChild(messageDiv);
-        this.scrollToBottom();
+        const messageDiv = document.createElement('div')
+        messageDiv.className = `message ${isUser ? 'user' : 'bot'}`
+        messageDiv.textContent = text
+        this.messagesContainer.appendChild(messageDiv)
+        this.scrollToBottom()
     }
 
     showTypingIndicator() {
-        this.typingIndicator.style.display = 'flex';
+        if (this.typingIndicator) this.typingIndicator.style.display = 'flex'
     }
 
     hideTypingIndicator() {
-        this.typingIndicator.style.display = 'none';
+        if (this.typingIndicator) this.typingIndicator.style.display = 'none'
     }
 
     scrollToBottom() {
-        this.messagesContainer.scrollTop = this.messagesContainer.scrollHeight;
+        this.messagesContainer.scrollTop = this.messagesContainer.scrollHeight
+    }
+
+    /** Build the welcome speech bubble — used by clearChat + lang change. */
+    buildWelcomeMessage() {
+        const t = window.i18n?.t
+        const dict = (key, fallback) => (t ? t(key) ?? fallback : fallback)
+
+        const welcome = document.createElement('div')
+        welcome.className = 'welcome-message'
+        welcome.innerHTML = `
+            <h2 data-i18n="chatbot.welcome.title">${dict('chatbot.welcome.title', 'Welcome to RSU Library')}</h2>
+            <p data-i18n="chatbot.welcome.intro">${dict('chatbot.welcome.intro', 'Hi! I can help you with:')}</p>
+            <ul>
+                <li data-i18n="chatbot.welcome.i1">${dict('chatbot.welcome.i1', 'Finding books and resources')}</li>
+                <li data-i18n="chatbot.welcome.i2">${dict('chatbot.welcome.i2', 'Booking study rooms')}</li>
+                <li data-i18n="chatbot.welcome.i3">${dict('chatbot.welcome.i3', 'Printing and computer services')}</li>
+                <li data-i18n="chatbot.welcome.i4">${dict('chatbot.welcome.i4', 'Library hours and locations')}</li>
+            </ul>
+            <p data-i18n="chatbot.welcome.prompt">${dict('chatbot.welcome.prompt', 'What can I help you with?')}</p>
+        `
+        return welcome
     }
 
     clearChat() {
         while (this.messagesContainer.firstChild) {
-            this.messagesContainer.removeChild(this.messagesContainer.firstChild);
+            this.messagesContainer.removeChild(this.messagesContainer.firstChild)
         }
-        // Add welcome message back
-        const welcomeMessage = document.createElement('div');
-        welcomeMessage.className = 'welcome-message';
-        welcomeMessage.innerHTML = `
-            <h2>Welcome to RSU Library</h2>
-            <p>Hi! I can help you with:</p>
-            <ul>
-                <li>Finding books and resources</li>
-                <li>Booking study rooms</li>
-                <li>Printing and computer services</li>
-                <li>Library hours and locations</li>
-            </ul>
-            <p>What can I help you with?</p>
-        `;
-        this.messagesContainer.appendChild(welcomeMessage);
-        this.chat_history = [];
+        this.messagesContainer.appendChild(this.buildWelcomeMessage())
+        this.history = []
+    }
+
+    /** Reset on language change — same as clear, but also re-applies i18n. */
+    resetForLanguageChange() {
+        this.clearChat()
+        window.i18n?.applyTranslations?.()
     }
 
     async handleSendMessage() {
-        const message = this.userInput.value.trim();
-        if (!message) return;
+        const message = this.userInput.value.trim()
+        if (!message) return
 
-        // Add user message to UI
-        this.addMessage(message, true);
-        
-        // Clear input and reset height
-        this.userInput.value = '';
-        this.adjustTextareaHeight();
+        // Frontend rate limit — protects against spam-clicks
+        const now = Date.now()
+        const elapsed = now - this.lastSendTime
+        if (elapsed < RATE_LIMIT_MS) {
+            const waitMs = RATE_LIMIT_MS - elapsed
+            this.userInput.placeholder = `Please wait ${Math.ceil(waitMs / 1000)}s…`
+            setTimeout(() => {
+                this.userInput.placeholder = window.i18n?.t?.('chatbot.input.placeholder') ?? 'Type your message here...'
+            }, waitMs)
+            return
+        }
+        this.lastSendTime = now
 
-        // Show typing indicator
-        this.showTypingIndicator();
+        this.addMessage(message, true)
+        this.userInput.value = ''
+        this.adjustTextareaHeight()
+        this.showTypingIndicator()
+        this.sendButton.disabled = true
 
         try {
-            // Add user message to history
-            this.chat_history.push({ role: 'user', parts: message });
+            const response = await fetch('/api/chat', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    history: this.history,
+                    message,
+                }),
+            })
 
-            // Get AI response
-            const result = await this.model.generateContent({
-                contents: [{
-                    parts: [{
-                        text: `You are a friendly and helpful library assistant at Rangsit University Library.
-                        Respond in a natural, conversational way without using any special formatting or symbols like asterisks.
-                        Make students feel welcome and comfortable asking questions.
-                        
-                        When helping visitors:
-                        - Be warm and approachable
-                        - Use natural language and simple sentences
-                        - Avoid technical jargon unless necessary
-                        - Don't use any special formatting or markdown
-                        - Keep responses clear and concise
-                        - When asked about location, simply say "We're located in Building 7"
-                        
-                        Library Information:
-                        - Hours: Mon-Fri 8:00-17:00, Sat-Sun 9:00-17:00
-                        - Location: Building 7
-                        - Contact: library@rsu.ac.th, Tel: 02-997-2222 ext. 3461
-                        - Services: Book borrowing, study rooms, computer access, printing, research support
-                        - Online Resources: Access Pharmacy, BioMed Central, Business Source Ultimate, Science Direct
-                        
-                        Keep responses under 150 words and maintain a helpful, friendly tone.
-                        For location queries, just mention Building 7 - no need for the full address.
-
-                        User question: ${message}`
-                    }]
-                }]
-            });
-
-            const response = result.response.text();
-            
-            // Add AI response to history
-            this.chat_history.push({ role: 'assistant', parts: response });
-            
-            // Hide typing indicator and show response
-            this.hideTypingIndicator();
-            this.addMessage(response);
-
-            // Limit history to last 10 messages
-            if (this.chat_history.length > 10) {
-                this.chat_history = this.chat_history.slice(-10);
+            if (!response.ok) {
+                const err = await response.json().catch(() => ({}))
+                throw Object.assign(new Error(err.error || `HTTP ${response.status}`), {
+                    status: response.status,
+                    detail: err,
+                })
             }
-        } catch (error) {
-            console.error('Error getting AI response:', error);
-            this.hideTypingIndicator();
-            this.addMessage('Sorry, I encountered an error. Please try again later.');
-            this.updateStatus(false);
+
+            const { reply } = await response.json()
+            this.hideTypingIndicator()
+            this.addMessage(reply)
+
+            // Update local history with the turn that just completed
+            this.history.push({ role: 'user', parts: [{ text: message }] })
+            this.history.push({ role: 'model', parts: [{ text: reply }] })
+            // Cap to last 20 turns (matches backend cap)
+            if (this.history.length > 20) this.history = this.history.slice(-20)
+
+            this.updateStatus(true)
+        } catch (err) {
+            console.error('Chat error:', err)
+            this.hideTypingIndicator()
+            const friendly =
+                err?.status === 429
+                    ? "I'm getting too many requests right now. Try again in a moment."
+                    : err?.status === 503
+                        ? 'The AI service is busy. Try again in a few seconds.'
+                        : err?.status >= 500
+                            ? 'The AI service had a hiccup. Try again.'
+                            : 'Sorry, I hit an error. Please try again.'
+            this.addMessage(friendly)
+            this.updateStatus(false)
+        } finally {
+            this.sendButton.disabled = false
         }
     }
 }
 
 // Initialize chatbot
-const chatbot = new Chatbot(); 
+new Chatbot()
