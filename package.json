@@ -1,12 +1,14 @@
 {
   "name": "rsu-library-assistant",
   "version": "1.0.0",
-  "description": "Rangsit University Library AI assistant — vanilla JS frontend + Express backend proxy for Gemini",
+  "description": "Rangsit University Library AI assistant — vanilla JS frontend + Gemini chatbot. Runs as Express locally; deploys to Vercel as static + serverless functions.",
+  "type": "module",
   "scripts": {
     "dev": "cd backend && npm run dev",
     "start": "cd backend && npm start",
     "install:all": "cd backend && npm install"
+  },
+  "dependencies": {
+    "@google/generative-ai": "^0.24.1"
   }
 }
-
-
